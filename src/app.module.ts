@@ -18,6 +18,3 @@ import { UserModule } from './user/user.module';
     providers: [],
 })
 export class AppModule {}
-
-// Docker mysql container
-// docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=test -p 3306:3306 -d mysql:8.0
