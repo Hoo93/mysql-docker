@@ -1,26 +1,37 @@
-import { Injectable } from '@nestjs/common';
-import { CreateAuthDto } from './dto/create-auth.dto';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { CreateAuthDto, UserCredentialDto } from './dto/user.credential.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
+import { UserService } from 'src/user/user.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  create(createAuthDto: CreateAuthDto) {
-    return 'This action adds a new auth';
-  }
+    constructor(
+        private readonly userService: UserService,
+        private readonly jwtService: JwtService,
+    ) {}
 
-  findAll() {
-    return `This action returns all auth`;
-  }
+    async validateUser(
+        userCredentialDto: UserCredentialDto,
+    ): Promise<{ accessToken: string }> {
+        const user = await this.userService.getUserByName(
+            userCredentialDto.name,
+        );
 
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
+        if (!user) {
+            throw new UnauthorizedException(
+                `User with name ${userCredentialDto.name} doesn't exist`,
+            );
+        }
 
-  update(id: number, updateAuthDto: UpdateAuthDto) {
-    return `This action updates a #${id} auth`;
-  }
+        if (user.name !== userCredentialDto.name) {
+            throw new UnauthorizedException('The user name does not match.');
+        }
 
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
-  }
+        // TODO password encrypt and decrypt
+
+        return {
+            accessToken: this.jwtService.sign(userCredentialDto),
+        };
+    }
 }
