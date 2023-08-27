@@ -1,14 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-    IsEmail,
-    IsNotEmpty,
-    IsString,
-    Matches,
-    Max,
-    Min,
-    max,
-    min,
-} from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, Matches, Max, Min, max, min } from 'class-validator';
 import { BaseTimeEntity } from 'src/BaseTimeEntity';
 import { User } from '../entities/user.entity';
 

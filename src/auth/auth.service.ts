@@ -1,14 +1,11 @@
-import {
-    BadRequestException,
-    Injectable,
-    UnauthorizedException,
-} from '@nestjs/common';
+import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { UserCredentialDto } from './dto/user.credential.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
 import { UserService } from 'src/user/user.service';
 import { JwtService } from '@nestjs/jwt';
-import { CreateUserDto } from 'src/user/dto/create-user.dto';
+import { CreateUserDto } from 'src/user/dto/createUser.dto';
 import { UserRepository } from 'src/user/user.repository';
+import { User } from 'src/user/entities/user.entity';
 
 @Injectable()
 export class AuthService {
@@ -17,28 +14,22 @@ export class AuthService {
         private readonly jwtService: JwtService,
     ) {}
 
-    async signUp(createUserDto: CreateUserDto) {
+    async signup(createUserDto: CreateUserDto): Promise<User> {
         const user = createUserDto.toEntity();
         user.hashPassword();
 
         if (await this.userRepository.findOneBy({ name: user.name })) {
-            throw new BadRequestException(
-                `user name with ${createUserDto.name} already exist`,
-            );
+            throw new BadRequestException(`user name with ${createUserDto.name} already exist`);
         }
+
+        return await this.userRepository.save(user);
     }
 
-    async validateUser(
-        userCredentialDto: UserCredentialDto,
-    ): Promise<{ accessToken: string }> {
-        const user = await this.userRepository.findOneBy({
-            name: userCredentialDto.name,
-        });
+    async validateUser(userCredentialDto: UserCredentialDto): Promise<{ accessToken: string }> {
+        const user = await this.userRepository.findOneBy({ name: userCredentialDto.name });
 
         if (!user) {
-            throw new UnauthorizedException(
-                `User with name ${userCredentialDto.name} doesn't exist`,
-            );
+            throw new UnauthorizedException(`User doesn't exist`);
         }
 
         if (!user.validatePassword(userCredentialDto.password)) {
