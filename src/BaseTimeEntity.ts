@@ -12,9 +12,9 @@ export class BaseTimeEntity {
     @PrimaryGeneratedColumn('increment')
     id: number;
 
-    @ApiProperty({ type: CreateDateColumn })
-    createdAt: string;
+    @ApiProperty({ type: Date })
+    createdAt: Date;
 
-    @ApiProperty({ type: UpdateDateColumn })
-    updatedAt: string;
+    @ApiProperty({ type: Date })
+    updatedAt: Date;
 }

@@ -8,8 +8,9 @@ import {
     Delete,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { CreateAuthDto, UserCredentialDto } from './dto/user.credential.dto';
+import { UserCredentialDto } from './dto/user.credential.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
+import { CreateUserDto } from 'src/user/dto/create-user.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -17,6 +18,11 @@ export class AuthController {
 
     @Post('/signin')
     async signin(@Body() userCredentialDto: UserCredentialDto) {
-        return this.authService.create(createAuthDto);
+        return this.authService.validateUser(userCredentialDto);
+    }
+
+    @Post('/signup')
+    async signup(@Body() createUserDto: CreateUserDto) {
+        return this.authService.signUp(createUserDto);
     }
 }
