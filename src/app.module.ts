@@ -6,6 +6,5 @@ import { TypeOrmOption } from './dbms/typeorm.config';
 
 @Module({
     imports: [TypeOrmModule.forRoot(TypeOrmOption), UserModule, AuthModule],
-    providers: [],
 })
 export class AppModule {}

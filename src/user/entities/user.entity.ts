@@ -3,13 +3,13 @@ import { BaseTimeEntity } from 'src/BaseTimeEntity';
 import * as bcrypt from 'bcrypt';
 import { Column, Entity, Unique } from 'typeorm';
 @Unique(['name'])
-@Entity({ name: 'USER' })
+@Entity({ schema: 'healthRecord', name: 'USER' })
 export class User extends BaseTimeEntity {
     @ApiProperty({
         description: '회원 이름',
-        example: '이상무',
+        example: 'test name',
         pattern: `/^[ㄱ-ㅎ가-힣a-zA-Z\s+]+$/`,
-        maxLength: 20,
+        maxLength: 10,
     })
     @Column({ type: 'varchar' })
     name: string;
@@ -17,8 +17,8 @@ export class User extends BaseTimeEntity {
     @ApiProperty({
         example: 'test password',
         description: '비밀번호',
-        pattern: '/^(?=.*\\d)(?=.*[a-z])[a-z\\d]{8,20}$/',
-        maxLength: 10,
+        pattern: '/^(?=.*[a-zA-Z])(?=.*d)(?=.*[!@#$%^*])[A-Za-zd!@#$%^*]+$/',
+        maxLength: 12,
     })
     @Column({ type: 'varchar' })
     password: string;
@@ -45,7 +45,6 @@ export class User extends BaseTimeEntity {
 
     async hashPassword(): Promise<void> {
         this.password = await bcrypt.hash(this.password, 10);
-        return;
     }
 
     async validatePassword(password: string): Promise<boolean> {

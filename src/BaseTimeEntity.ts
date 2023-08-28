@@ -1,9 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class BaseTimeEntity {
-    @ApiProperty()
+    @ApiProperty({ type: String, example: 1, description: 'user ID' })
     @PrimaryGeneratedColumn('increment')
     id: number;
 

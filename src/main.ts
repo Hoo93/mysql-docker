@@ -12,6 +12,7 @@ async function bootstrap() {
             whitelist: true,
         }),
     );
+
     const config = new DocumentBuilder()
         .setTitle('workout recorder')
         .setDescription('workout recorder')
