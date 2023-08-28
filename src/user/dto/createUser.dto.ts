@@ -1,23 +1,22 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsString, Matches, Max, Min, max, min } from 'class-validator';
-import { BaseTimeEntity } from 'src/BaseTimeEntity';
+import { IsEmail, IsString, Matches, MaxLength, MinLength } from 'class-validator';
 import { User } from '../entities/user.entity';
 
 export class CreateUserDto {
-    @ApiProperty({ type: String })
+    // @ApiProperty({ type: String })
     @IsString()
-    @Min(2)
-    @Max(10)
+    @MinLength(2)
+    @MaxLength(10)
     name: string;
 
-    @ApiProperty({ type: String })
+    // @ApiProperty({ type: String })
     @IsString()
     @Matches(/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^*])[A-Za-z\d!@#$%^*]+$/)
-    @Min(6)
-    @Max(10)
+    @MinLength(2)
+    @MaxLength(10)
     password: string;
 
-    @ApiProperty({ type: String })
+    // @ApiProperty({ type: String })
     @IsEmail()
     email: string;
 

@@ -1,11 +1,10 @@
 import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { UserCredentialDto } from './dto/user.credential.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
-import { UserService } from 'src/user/user.service';
 import { JwtService } from '@nestjs/jwt';
-import { CreateUserDto } from 'src/user/dto/createUser.dto';
+import { CreateUserDto } from '../user/dto/createUser.dto';
 import { UserRepository } from 'src/user/user.repository';
 import { User } from 'src/user/entities/user.entity';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -15,14 +14,21 @@ export class AuthService {
     ) {}
 
     async signup(createUserDto: CreateUserDto): Promise<User> {
-        const user = createUserDto.toEntity();
-        user.hashPassword();
+        let { name, password, email } = createUserDto;
+        const now = new Date();
+        const user = User.signup(name, password, email, now, now);
+        await user.hashPassword();
 
         if (await this.userRepository.findOneBy({ name: user.name })) {
             throw new BadRequestException(`user name with ${createUserDto.name} already exist`);
         }
 
-        return await this.userRepository.save(user);
+        try {
+            return await this.userRepository.save(user);
+        } catch (error) {
+            console.error(error);
+            throw new BadRequestException(error);
+        }
     }
 
     async validateUser(userCredentialDto: UserCredentialDto): Promise<{ accessToken: string }> {
