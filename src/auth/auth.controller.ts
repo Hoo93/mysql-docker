@@ -10,11 +10,19 @@ export class AuthController {
 
     @Post('/signin')
     async signin(@Body() userCredentialDto: UserCredentialDto): Promise<{ accessToken: string }> {
-        return this.authService.validateUser(userCredentialDto);
+        try {
+            return this.authService.validateUser(userCredentialDto);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     @Post('/signup')
     async signup(@Body() createUserDto: CreateUserDto): Promise<User> {
-        return this.authService.signup(createUserDto);
+        try {
+            return this.authService.signup(createUserDto);
+        } catch (error) {
+            console.error(error);
+        }
     }
 }

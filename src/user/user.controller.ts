@@ -17,13 +17,21 @@ export class UserController {
 
     @Patch('/:id')
     async updateUser(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto): Promise<User> {
-        const updatedUser = await this.userService.updateUser(id, updateUserDto);
-        return updatedUser;
+        try {
+            const updatedUser = await this.userService.updateUser(id, updateUserDto);
+            return updatedUser;
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     @Get('/search/:name')
     async searchUserByName(@Param('name') name: string) {
-        const users = await this.userService.searchUserByName(name);
-        return users;
+        try {
+            const users = await this.userService.searchUserByName(name);
+            return users;
+        } catch (error) {
+            console.error(error);
+        }
     }
 }
