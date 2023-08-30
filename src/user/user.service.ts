@@ -15,18 +15,20 @@ export class UserService {
         if (!user) {
             throw new NotFoundException("There's no user");
         }
+
         return user;
     }
 
     async searchUserByName(name: string): Promise<User[]> {
         const users = await this.userRepository
             .createQueryBuilder('user')
-            .where(`user.name LIKE '${name}'`)
+            .where(`user.name LIKE '%${name}%'`)
             .getMany();
 
         if (!users) {
             throw new NotFoundException("There's no user");
         }
+
         return users;
     }
 
