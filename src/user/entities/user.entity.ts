@@ -3,7 +3,7 @@ import { BaseTimeEntity } from 'src/BaseTimeEntity';
 import * as bcrypt from 'bcrypt';
 import { Column, Entity, Unique } from 'typeorm';
 @Unique(['name'])
-@Entity({ schema: 'healthRecord', name: 'USER' })
+@Entity({ schema: 'healthRecord', name: 'User' })
 export class User extends BaseTimeEntity {
     @ApiProperty({
         description: '회원 이름',
