@@ -3,7 +3,7 @@ import { CreateUserDto } from './dto/createUser.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
 import { UserRepository } from './user.repository';
 import { User } from './entities/user.entity';
-import { UpdateResult } from 'typeorm';
+import { DeleteResult, UpdateResult } from 'typeorm';
 
 @Injectable()
 export class UserService {
@@ -44,5 +44,10 @@ export class UserService {
         }
 
         return await this.getUserById(id);
+    }
+
+    async deleteUser(id: number): Promise<DeleteResult> {
+        const deleterResult = await this.userRepository.softDelete({ id });
+        return deleterResult;
     }
 }
