@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { BaseTimeEntity } from 'src/BaseTimeEntity';
+import { BaseTimeEntity } from '../../BaseTimeEntity';
 import * as bcrypt from 'bcrypt';
 import { Column, Entity, Unique } from 'typeorm';
 @Unique(['name'])
