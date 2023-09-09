@@ -4,19 +4,29 @@ import { TypeOrmModule, getRepositoryToken } from '@nestjs/typeorm';
 import { TypeOrmOption } from 'src/dbms/typeorm.config';
 import { DataSource, Repository } from 'typeorm';
 import { User } from './entities/user.entity';
-import { UserRepository } from './user.repository';
 
 describe('UserService', () => {
     let service: UserService;
-    let repository: UserRepository;
+    let userRepository: Repository<User>;
 
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            providers: [UserService, UserRepository],
+            providers: [
+                UserService,
+                {
+                    provide: getRepositoryToken(User),
+                    useValue: {
+                        create: jest.fn(),
+                        save: jest.fn(),
+                        update: jest.fn(),
+                        findOneBy: jest.fn(),
+                    },
+                },
+            ],
         }).compile();
 
         service = module.get<UserService>(UserService);
-        repository = module.get<UserRepository>(UserRepository);
+        userRepository = module.get<Repository<User>>(getRepositoryToken(User));
     });
 
     it('should be defined', () => {

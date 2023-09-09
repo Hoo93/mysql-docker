@@ -4,11 +4,22 @@ import { UpdateUserDto } from './dto/updateUser.dto';
 import { User } from './entities/user.entity';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserRepository } from './user.repository';
+// import { UserRepository } from './user.repository';
 
 @Injectable()
 export class UserService {
-    constructor(private readonly userRepository: UserRepository) {}
+    // Repository 구현 방법 1
+    // Repository Class 구현 후 주입
+    // 단점 테스트 어려움
+    // constructor(private readonly userRepository: UserRepository) {}
+
+    // Repository 구현 방법 12
+    // Repository Class 구현 하지 않고 바로 Repository 주입
+    // 단점 : 커스텀 불가능
+    constructor(
+        @InjectRepository(User)
+        private readonly userRepository: Repository<User>,
+    ) {}
 
     async getUserById(id: number): Promise<User> {
         const user = await this.userRepository.findOneBy({ id });
