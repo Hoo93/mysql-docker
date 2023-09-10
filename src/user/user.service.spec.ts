@@ -47,5 +47,10 @@ describe('UserService', () => {
         it('should be a function', () => {
             expect(typeof service.getUserById).toBe('function');
         });
+
+        // TODO
+        it('should return user', async () => {
+            userRepository.findOneBy({ id: 1 });
+        });
     });
 });

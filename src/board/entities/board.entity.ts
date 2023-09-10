@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { BaseTimeEntity } from 'src/BaseTimeEntity';
-import { Column } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 
+@Entity({ schema: 'healthRecord', name: 'Board' })
 export class Board extends BaseTimeEntity {
     @ApiProperty({ description: '글 제목', example: 'board title', minLength: 1, maxLength: 50 })
     @Column()
