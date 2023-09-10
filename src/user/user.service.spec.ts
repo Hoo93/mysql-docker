@@ -32,4 +32,20 @@ describe('UserService', () => {
     it('should be defined', () => {
         expect(service).toBeDefined();
     });
+
+    describe('getUserById', () => {
+        beforeEach(() => {
+            let user = User.signup(
+                'test name',
+                'test password',
+                'test email',
+                new Date(),
+                new Date(),
+            );
+            user.id = 1;
+        });
+        it('should be a function', () => {
+            expect(typeof service.getUserById).toBe('function');
+        });
+    });
 });
