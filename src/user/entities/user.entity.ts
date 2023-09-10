@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { BaseTimeEntity } from '../../BaseTimeEntity';
 import * as bcrypt from 'bcrypt';
 import { Column, Entity, OneToMany, Unique } from 'typeorm';
-import { Board } from 'src/board/entities/board.entity';
+import { Board } from '../../board/entities/board.entity';
 @Unique(['name'])
 @Entity({ schema: 'healthRecord', name: 'User' })
 export class User extends BaseTimeEntity {

@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { BaseTimeEntity } from 'src/BaseTimeEntity';
-import { User } from 'src/user/entities/user.entity';
+import { BaseTimeEntity } from '../../BaseTimeEntity';
+import { User } from '../../user/entities/user.entity';
 import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity({ schema: 'healthRecord', name: 'Board' })

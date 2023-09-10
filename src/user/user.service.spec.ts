@@ -6,7 +6,7 @@ import { DataSource, Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 
 describe('UserService', () => {
-    let service: UserService;
+    let userService: UserService;
     let userRepository: Repository<User>;
 
     beforeEach(async () => {
@@ -25,12 +25,12 @@ describe('UserService', () => {
             ],
         }).compile();
 
-        service = module.get<UserService>(UserService);
+        userService = module.get<UserService>(UserService);
         userRepository = module.get<Repository<User>>(getRepositoryToken(User));
     });
 
     it('should be defined', () => {
-        expect(service).toBeDefined();
+        expect(userService).toBeDefined();
     });
 
     describe('getUserById', () => {
@@ -45,10 +45,10 @@ describe('UserService', () => {
             user.id = 1;
         });
         it('should be a function', () => {
-            expect(typeof service.getUserById).toBe('function');
+            expect(typeof userService.getUserById).toBe('function');
         });
 
-        // TODO
+        // TODOs
         it('should return user', async () => {
             userRepository.findOneBy({ id: 1 });
         });
