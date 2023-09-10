@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { BaseTimeEntity } from 'src/BaseTimeEntity';
-import { Column, Entity } from 'typeorm';
+import { User } from 'src/user/entities/user.entity';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity({ schema: 'healthRecord', name: 'Board' })
 export class Board extends BaseTimeEntity {
@@ -23,4 +24,7 @@ export class Board extends BaseTimeEntity {
     })
     @Column()
     categoryCode: string;
+
+    @ManyToOne(() => User, (user) => user.boards)
+    user: User;
 }
