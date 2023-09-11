@@ -50,7 +50,7 @@ describe('UserService', () => {
 
         // TODOs
         it('should return user', async () => {
-            userRepository.findOneBy({ id: 1 });
+            const user = await userRepository.findOneBy({ id: 1 });
         });
     });
 });
