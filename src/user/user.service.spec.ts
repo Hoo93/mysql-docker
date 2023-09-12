@@ -50,7 +50,17 @@ describe('UserService', () => {
 
         // TODOs
         it('should return user', async () => {
-            const user = await userRepository.findOneBy({ id: 1 });
+            let user = User.signup(
+                'test name',
+                'test password',
+                'test email',
+                new Date(),
+                new Date(),
+            );
+
+            expect(typeof user).toBe(User);
         });
+
+        it('should retrun');
     });
 });
