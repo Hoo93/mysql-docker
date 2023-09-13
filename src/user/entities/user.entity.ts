@@ -29,7 +29,7 @@ export class User extends BaseTimeEntity {
         example: 'User',
         maxLength: 12,
     })
-    @Column({ type: 'enum' })
+    @Column({ type: 'enum', default: 'User', nullable: false })
     role: Role;
 
     @ApiProperty({ example: 'test@email.com', description: '이메일' })
