@@ -24,6 +24,14 @@ export class User extends BaseTimeEntity {
     @Column({ type: 'varchar' })
     password: string;
 
+    @ApiProperty({
+        description: '유저의 Role "User" 또는 "Admin"',
+        example: 'User',
+        maxLength: 12,
+    })
+    @Column({ type: 'enum' })
+    role: Role;
+
     @ApiProperty({ example: 'test@email.com', description: '이메일' })
     @Column({ type: 'varchar' })
     email: string;
@@ -54,4 +62,9 @@ export class User extends BaseTimeEntity {
     async validatePassword(password: string): Promise<boolean> {
         return await bcrypt.compare(password, this.password);
     }
+}
+
+enum Role {
+    'User',
+    'Admin',
 }
