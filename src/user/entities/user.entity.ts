@@ -3,6 +3,7 @@ import { BaseTimeEntity } from '../../BaseTimeEntity';
 import * as bcrypt from 'bcrypt';
 import { Column, Entity, OneToMany, Unique } from 'typeorm';
 import { Board } from '../../board/entities/board.entity';
+import { Attendance } from 'src/attendance/entities/attendance.entity';
 @Unique(['name'])
 @Entity({ schema: 'healthRecord', name: 'User' })
 export class User extends BaseTimeEntity {
@@ -38,6 +39,11 @@ export class User extends BaseTimeEntity {
 
     @OneToMany(() => Board, (board) => board.user)
     boards: Board[];
+
+    // TODO M:N 관계 해결 필요
+    // manager / member 구별 필요
+    // @OneToMany(() => Attendance, (attendance) => attendance.manager)
+    // attendances: Attendance[];
 
     static signup(
         name: string,
