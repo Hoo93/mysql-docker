@@ -2,7 +2,16 @@ import { ApiProperty } from '@nestjs/swagger';
 import { BaseTimeEntity } from 'src/BaseTimeEntity';
 import { Attendance } from 'src/attendance/entities/attendance.entity';
 import { User } from 'src/user/entities/user.entity';
-import { Column, Entity, JoinColumn, OneToMany, OneToOne, TableForeignKey } from 'typeorm';
+import {
+    Column,
+    Entity,
+    JoinColumn,
+    JoinTable,
+    ManyToMany,
+    OneToMany,
+    OneToOne,
+    TableForeignKey,
+} from 'typeorm';
 
 @Entity()
 export class Manager extends BaseTimeEntity {
@@ -10,6 +19,7 @@ export class Manager extends BaseTimeEntity {
     @JoinColumn()
     userId: User;
 
-    @OneToMany(() => Attendance, (attendance) => attendance.manager)
-    attendances: Attendance;
+    @ManyToMany(() => Attendance, (attendance) => attendance.managers)
+    @JoinTable()
+    attendances: Attendance[];
 }
