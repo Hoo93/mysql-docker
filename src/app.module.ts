@@ -7,6 +7,7 @@ import { BoardModule } from './board/board.module';
 import { DataSource } from 'typeorm';
 import { AttendanceModule } from './attendance/attendance.module';
 import { ManagerModule } from './manager/manager.module';
+import { AttendeeModule } from './attendee/attendee.module';
 
 @Module({
     imports: [
@@ -16,6 +17,7 @@ import { ManagerModule } from './manager/manager.module';
         BoardModule,
         AttendanceModule,
         ManagerModule,
+        AttendeeModule,
     ],
 })
 export class AppModule {

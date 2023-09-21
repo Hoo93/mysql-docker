@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { BaseTimeEntity } from 'src/BaseTimeEntity';
-import { Manager } from 'src/manager/entities/manager.entity';
+import { Attendee } from 'src/attendee/entities/attendee.entity';
 import { User } from 'src/user/entities/user.entity';
 import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
 
@@ -39,9 +39,8 @@ export class Attendance extends BaseTimeEntity {
     @JoinTable()
     users: User[];
 
-    @ManyToMany(() => Manager, (manager) => manager.attendances)
-    @JoinTable()
-    managers: Manager[];
+    @OneToMany(() => Attendee, (attendee) => attendee.attendance)
+    attendees: Attendee[];
 
     // TODO M:N 관계 해결 필요
     // manager / member 구별 필요
