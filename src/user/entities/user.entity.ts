@@ -2,7 +2,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import { BaseTimeEntity } from '../../BaseTimeEntity';
 import * as bcrypt from 'bcrypt';
 import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, Unique } from 'typeorm';
-import { Board } from '../../board/entities/board.entity';
 import { Attendance } from 'src/attendance/entities/attendance.entity';
 @Unique(['name'])
 @Entity({ schema: 'healthRecord', name: 'User' })
@@ -36,9 +35,6 @@ export class User extends BaseTimeEntity {
     @ApiProperty({ example: 'test@email.com', description: '이메일' })
     @Column({ type: 'varchar' })
     email: string;
-
-    @OneToMany(() => Board, (board) => board.user)
-    boards: Board[];
 
     @ManyToMany(() => Attendance, (attendance) => attendance.users)
     @JoinTable()
