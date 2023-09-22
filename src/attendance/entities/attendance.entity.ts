@@ -42,6 +42,9 @@ export class Attendance extends BaseTimeEntity {
     @OneToMany(() => Attendee, (attendee) => attendee.attendance)
     attendees: Attendee[];
 
+    @OneToMany(() => Comment, (comment) => comment.attendance)
+    comments: Comment[];
+
     // TODO M:N 관계 해결 필요
     // manager / member 구별 필요
     // @ManyToOne(() => User, (manager) => manager.attendances)
