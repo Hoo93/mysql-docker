@@ -17,6 +17,6 @@ export class Attendee extends BaseTimeEntity {
     @Column()
     birth: String;
 
-    @ManyToOne(() => Attendance, (attendance) => attendance.attendees)
+    @ManyToOne((type) => Attendance, (attendance) => attendance.attendees)
     attendance: Attendance;
 }

@@ -11,6 +11,6 @@ export class Comment extends BaseTimeEntity {
     @Column()
     content: string;
 
-    @ManyToOne(() => Attendance, (attendance) => attendance.comments)
+    @ManyToOne((type) => Attendance, (attendance) => attendance.comments)
     attendance: Attendance;
 }
