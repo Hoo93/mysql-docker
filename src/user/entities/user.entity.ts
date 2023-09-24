@@ -40,8 +40,12 @@ export class User extends BaseTimeEntity {
     @JoinTable()
     attendances: Attendance[];
 
-    // TODO M:N 관계 해결 필요
-    // manager / member 구별 필요
+    @ApiProperty({
+        description: '유저의 refresh-token',
+        example: 'refresh-token',
+    })
+    @Column({ type: 'text', nullable: true })
+    refreshToken: string;
 
     static signup(
         name: string,
