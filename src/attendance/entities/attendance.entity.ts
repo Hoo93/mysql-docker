@@ -1,10 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { BaseTimeEntity } from 'src/BaseTimeEntity';
 import { Attendee } from 'src/attendee/entities/attendee.entity';
+import { Comment } from 'src/comment/entities/comment.entity';
 import { User } from 'src/user/entities/user.entity';
 import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
 
-@Entity()
+@Entity({ schema: 'Attendance', name: 'Attendance' })
 export class Attendance extends BaseTimeEntity {
     @ApiProperty({
         description: '출석부 이름',
@@ -44,6 +45,9 @@ export class Attendance extends BaseTimeEntity {
 
     @OneToMany(() => Comment, (comment) => comment.attendance)
     comments: Comment[];
+
+    // @OneToMany(() => Comment, (comment) => comment.attendance)
+    // comments: Comment[];
 
     // TODO M:N 관계 해결 필요
     // manager / member 구별 필요

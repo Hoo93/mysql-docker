@@ -4,7 +4,7 @@ import * as bcrypt from 'bcrypt';
 import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, Unique } from 'typeorm';
 import { Attendance } from 'src/attendance/entities/attendance.entity';
 @Unique(['name'])
-@Entity({ schema: 'healthRecord', name: 'User' })
+@Entity({ schema: 'Attendance', name: 'User' })
 export class User extends BaseTimeEntity {
     @ApiProperty({
         description: '회원 이름',
