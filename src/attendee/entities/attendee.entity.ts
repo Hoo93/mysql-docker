@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { BaseTimeEntity } from 'src/BaseTimeEntity';
-import { Attendance } from 'src/attendance/entities/attendance.entity';
-import { User } from 'src/user/entities/user.entity';
+import { BaseTimeEntity } from '../../BaseTimeEntity';
+import { Attendance } from '../../attendance/entities/attendance.entity';
 import { Column, Entity, ManyToOne } from 'typeorm';
 @Entity({ schema: 'Attendance', name: 'Attendee' })
 export class Attendee extends BaseTimeEntity {

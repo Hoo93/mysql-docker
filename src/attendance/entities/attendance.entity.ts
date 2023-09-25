@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { BaseTimeEntity } from 'src/BaseTimeEntity';
-import { Attendee } from 'src/attendee/entities/attendee.entity';
-import { Comment } from 'src/comment/entities/comment.entity';
-import { User } from 'src/user/entities/user.entity';
+import { BaseTimeEntity } from '../../BaseTimeEntity';
+import { Attendee } from '../../attendee//entities/attendee.entity';
+import { Comment } from '../../comment/entities/comment.entity';
+import { User } from '../../user/entities/user.entity';
 import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity({ schema: 'Attendance', name: 'Attendance' })
