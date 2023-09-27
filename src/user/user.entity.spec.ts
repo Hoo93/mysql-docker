@@ -41,4 +41,18 @@ describe('User Entity', () => {
             expect(user.password).not.toBe(password);
         });
     });
+
+    describe('validatePassword', () => {
+        it('should return true', async () => {
+            const password = 'testPassword';
+
+            user.password = password;
+            await user.hashPassword();
+
+            const validateResult = await user.validatePassword(password);
+            // password가 변경된 것과 validate 함께 테스트
+            expect(user.password).not.toBe(password);
+            expect(validateResult).toBe(true);
+        });
+    });
 });
