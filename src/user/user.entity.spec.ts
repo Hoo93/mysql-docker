@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { User } from './entities/user.entity';
+import * as bcrypt from 'bcrypt';
 
 describe('User Entity', () => {
     let user: User;
@@ -8,6 +9,8 @@ describe('User Entity', () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [User],
         }).compile();
+
+        user = module.get<User>(User);
     });
 
     describe('signup', () => {
@@ -25,6 +28,17 @@ describe('User Entity', () => {
             expect(newUser.email).toBe(email);
             expect(newUser.createdAt).toBe(now);
             expect(newUser.updatedAt).toBe(now);
+        });
+    });
+
+    describe('hashPassword', () => {
+        it('should return hashedPassword', async () => {
+            const password = 'testPassword';
+
+            user.password = password;
+            await user.hashPassword();
+
+            expect(user.password).not.toBe(password);
         });
     });
 });
