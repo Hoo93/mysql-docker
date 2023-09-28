@@ -1,11 +1,24 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { BaseTimeEntity } from '../../BaseTimeEntity';
 import * as bcrypt from 'bcrypt';
-import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, Unique } from 'typeorm';
+import {
+    Column,
+    Entity,
+    JoinTable,
+    ManyToMany,
+    ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn,
+    Unique,
+} from 'typeorm';
 import { Attendance } from '../../attendance/entities/attendance.entity';
+import { UUID } from 'crypto';
 @Unique(['name'])
 @Entity({ schema: 'Attendance', name: 'User' })
 export class User extends BaseTimeEntity {
+    @PrimaryGeneratedColumn('uuid')
+    id;
+
     @ApiProperty({
         description: '회원 이름',
         example: 'test name',

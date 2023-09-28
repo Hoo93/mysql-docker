@@ -16,10 +16,6 @@ export class Attendance extends BaseTimeEntity {
     @Column()
     title: string;
 
-    @ApiProperty()
-    @Column()
-    member: User[];
-
     @ApiProperty({
         description: '글 내용',
         example: 'this is board description',

@@ -7,7 +7,8 @@ export const TypeOrmOption: TypeOrmModuleOptions = {
     username: 'root',
     password: 'test',
     database: 'healthRecord',
-    entities: [__dirname + '/../*.entity.{js,ts}'],
+    // TODO
+    entities: [__dirname + '/../**/*.entity{.ts,.js}'],
     autoLoadEntities: true,
     synchronize: true,
 };

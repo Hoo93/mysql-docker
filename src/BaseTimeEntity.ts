@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class BaseTimeEntity {
-    @ApiProperty({ type: String, example: 1, description: 'user ID' })
+    @ApiProperty({ type: String, example: 1, description: 'table ID' })
     @PrimaryGeneratedColumn('increment')
     id: number;
 
