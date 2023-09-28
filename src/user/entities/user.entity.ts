@@ -13,6 +13,7 @@ import {
 } from 'typeorm';
 import { Attendance } from '../../attendance/entities/attendance.entity';
 import { UUID } from 'crypto';
+import { Role } from '../user.role';
 @Unique(['name'])
 @Entity({ schema: 'Attendance', name: 'User' })
 export class User extends BaseTimeEntity {
@@ -42,7 +43,7 @@ export class User extends BaseTimeEntity {
         example: 'User',
         maxLength: 12,
     })
-    @Column({ type: 'enum', default: 'User', nullable: false })
+    @Column({ type: 'enum', default: User, enum: Role, nullable: false })
     role: Role;
 
     @ApiProperty({ example: 'test@email.com', description: '이메일' })
@@ -83,9 +84,4 @@ export class User extends BaseTimeEntity {
     async validatePassword(password: string): Promise<boolean> {
         return await bcrypt.compare(password, this.password);
     }
-}
-
-enum Role {
-    'User',
-    'Admin',
 }
