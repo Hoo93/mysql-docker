@@ -44,9 +44,7 @@ export class UserService {
         return users;
     }
 
-    async updateUser(id: number, updateUserDto: UpdateUserDto): Promise<User> {
-        const user: User = await this.getUserById(id);
-
+    async updateUser(id: number, updateUserDto: UpdateUserDto): Promise<Number> {
         const updateResult: UpdateResult = await this.userRepository.update(
             { id: id },
             updateUserDto,
@@ -55,7 +53,7 @@ export class UserService {
             throw new BadRequestException('update failed');
         }
 
-        return await this.getUserById(id);
+        return id;
     }
 
     async deleteUser(id: number): Promise<DeleteResult> {

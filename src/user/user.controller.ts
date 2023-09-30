@@ -19,7 +19,10 @@ export class UserController {
         description: 'user update success',
         type: Number,
     })
-    async updateUser(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto): Promise<User> {
+    async updateUser(
+        @Param('id') id: number,
+        @Body() updateUserDto: UpdateUserDto,
+    ): Promise<Number> {
         try {
             const updatedUser = await this.userService.updateUser(id, updateUserDto);
             return updatedUser;
