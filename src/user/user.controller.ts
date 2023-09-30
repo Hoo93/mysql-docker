@@ -4,18 +4,21 @@ import { CreateUserDto } from './dto/createUser.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
 import { User } from './entities/user.entity';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags('user')
 @UseGuards(JwtAuthGuard)
 @Controller('user')
 export class UserController {
     constructor(private readonly userService: UserService) {}
 
-    @Get()
-    sayHello() {
-        return 'say hello';
-    }
-
     @Patch('/:id')
+    @ApiResponse({
+        status: 200,
+        description: 'user update success',
+        type: Number,
+    })
     async updateUser(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto): Promise<User> {
         try {
             const updatedUser = await this.userService.updateUser(id, updateUserDto);
@@ -26,6 +29,11 @@ export class UserController {
     }
 
     @Get('/search/:name')
+    @ApiResponse({
+        status: 200,
+        description: 'user found with given name',
+        type: User,
+    })
     async searchUserByName(@Param('name') name: string) {
         try {
             const users = await this.userService.searchUserByName(name);
