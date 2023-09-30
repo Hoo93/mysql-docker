@@ -16,7 +16,7 @@ export class AuthService {
         private readonly jwtService: JwtService,
     ) {}
 
-    async signup(createUserDto: CreateUserDto): Promise<User> {
+    async signup(createUserDto: CreateUserDto): Promise<Number> {
         let { name, password, email } = createUserDto;
         const now = new Date();
         const user = User.signup(name, password, email, now, now);
@@ -27,7 +27,8 @@ export class AuthService {
         }
 
         try {
-            return await this.userRepository.save(user);
+            const newUser = await this.userRepository.save(user);
+            return newUser.id;
         } catch (error) {
             console.error(error);
             throw new BadRequestException(error);
