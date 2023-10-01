@@ -22,10 +22,6 @@ export class AuthService {
         const user = User.signup(name, password, email, now, now);
         await user.hashPassword();
 
-        if (await this.userRepository.findOneBy({ name: user.name })) {
-            throw new BadRequestException(`user name with ${createUserDto.name} already exist`);
-        }
-
         try {
             const newUser = await this.userRepository.save(user);
             return newUser.id;

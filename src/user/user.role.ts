@@ -1,3 +1,3 @@
 export enum Role {
-    User = '관리자',
+    User = '사용자',
 }

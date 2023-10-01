@@ -1,25 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { BaseTimeEntity } from '../../BaseTimeEntity';
 import * as bcrypt from 'bcrypt';
-import {
-    Column,
-    Entity,
-    JoinTable,
-    ManyToMany,
-    ManyToOne,
-    OneToMany,
-    PrimaryGeneratedColumn,
-    Unique,
-} from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
 import { Attendance } from '../../attendance/entities/attendance.entity';
-import { UUID } from 'crypto';
 import { Role } from '../user.role';
 @Unique(['name'])
+@Unique(['email'])
 @Entity({ schema: 'Attendance', name: 'User' })
 export class User extends BaseTimeEntity {
-    @PrimaryGeneratedColumn('uuid')
-    id;
-
     @ApiProperty({
         description: '회원 이름',
         example: 'test name',
@@ -44,6 +32,7 @@ export class User extends BaseTimeEntity {
         maxLength: 12,
     })
     @Column({ type: 'enum', enum: Role, nullable: false })
+    // enum 타입은 column에 타입 명시해 줘야 함
     role: Role;
 
     @ApiProperty({ example: 'test@email.com', description: '이메일' })
