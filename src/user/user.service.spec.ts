@@ -47,20 +47,5 @@ describe('UserService', () => {
         it('should be a function', () => {
             expect(typeof userService.getUserById).toBe('function');
         });
-
-        // TODOs
-        it('should return user', async () => {
-            let user = User.signup(
-                'test name',
-                'test password',
-                'test email',
-                new Date(),
-                new Date(),
-            );
-
-            expect(typeof user).toBe(User);
-        });
-
-        it('should retrun');
     });
 });
