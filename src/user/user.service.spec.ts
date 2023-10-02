@@ -66,6 +66,7 @@ describe('UserService', () => {
             jest.spyOn(userRepository, 'findOneBy').mockResolvedValue(user);
 
             const foundUser = await userService.getUserById(userId);
+            expect(userRepository.findOneBy).toHaveBeenCalledWith({ id: userId });
             expect(foundUser).toBe(user);
         });
     });
