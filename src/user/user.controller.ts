@@ -24,8 +24,8 @@ export class UserController {
         @Body() updateUserDto: UpdateUserDto,
     ): Promise<Number> {
         try {
-            const updatedUser = await this.userService.updateUser(id, updateUserDto);
-            return updatedUser;
+            const updatedUserId = await this.userService.updateUser(id, updateUserDto);
+            return updatedUserId;
         } catch (error) {
             console.error(error);
         }
