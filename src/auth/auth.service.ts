@@ -38,7 +38,7 @@ export class AuthService {
             throw new UnauthorizedException(`User doesn't exist`);
         }
 
-        if (!user.validatePassword(userCredentialDto.password)) {
+        if (!(await user.validatePassword(userCredentialDto.password))) {
             throw new UnauthorizedException('incorrect password');
         }
 
