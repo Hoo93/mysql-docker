@@ -32,6 +32,7 @@ export class UserService {
     async searchUserByName(name: string): Promise<User[]> {
         const users = await this.userRepository
             .createQueryBuilder('user')
+            .select(['user.name', 'user.email', 'user.role'])
             .where(`user.name LIKE '%${name}%'`)
             .getMany();
 
