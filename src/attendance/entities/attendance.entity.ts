@@ -4,11 +4,13 @@ import { Attendee } from '../../attendee//entities/attendee.entity';
 import { Comment } from '../../comment/entities/comment.entity';
 import { User } from '../../user/entities/user.entity';
 import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
+import { attendanceType } from '../attendanceType.enum';
+import { type } from 'os';
 
 @Entity({ schema: 'Attendance', name: 'Attendance' })
 export class Attendance extends BaseTimeEntity {
     @ApiProperty({
-        description: '출석부 이름',
+        description: '출석부 제목',
         example: 'attendance title',
         minLength: 1,
         maxLength: 50,
@@ -17,8 +19,8 @@ export class Attendance extends BaseTimeEntity {
     title: string;
 
     @ApiProperty({
-        description: '글 내용',
-        example: 'this is board description',
+        description: '출석부 설명',
+        example: 'this is attendance description',
         minLength: 1,
         maxLength: 50,
     })
@@ -26,11 +28,11 @@ export class Attendance extends BaseTimeEntity {
     description: string;
 
     @ApiProperty({
-        description: 'this is foreign key of category',
-        example: 'board title',
+        description: 'this is type of attendance',
+        example: 'Weekend',
     })
-    @Column()
-    categoryCode: string;
+    @Column({ type: 'enum', enum: attendanceType })
+    type: attendanceType;
 
     @ManyToMany(() => User, (user) => user.attendances)
     @JoinTable()
@@ -41,12 +43,4 @@ export class Attendance extends BaseTimeEntity {
 
     @OneToMany(() => Comment, (comment) => comment.attendance)
     comments: Comment[];
-
-    // @OneToMany(() => Comment, (comment) => comment.attendance)
-    // comments: Comment[];
-
-    // TODO M:N 관계 해결 필요
-    // manager / member 구별 필요
-    // @ManyToOne(() => User, (manager) => manager.attendances)
-    // manager: User;
 }
