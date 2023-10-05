@@ -54,8 +54,8 @@ export class User extends BaseTimeEntity {
         name: string,
         password: string,
         email: string,
-        createdAt: Date,
-        updatedAt: Date,
+        createdAt: Date = new Date(),
+        updatedAt: Date = new Date(),
     ): User {
         const user = new User();
         user.name = name;
