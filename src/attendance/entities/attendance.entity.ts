@@ -5,7 +5,6 @@ import { Comment } from '../../comment/entities/comment.entity';
 import { User } from '../../user/entities/user.entity';
 import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
 import { attendanceType } from '../attendanceType.enum';
-import { type } from 'os';
 
 @Entity({ schema: 'Attendance', name: 'Attendance' })
 export class Attendance extends BaseTimeEntity {
