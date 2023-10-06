@@ -6,6 +6,7 @@ import { User } from '../../user/entities/user.entity';
 import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, Unique } from 'typeorm';
 import { attendanceType } from '../attendanceType.enum';
 
+@Unique(['title'])
 @Entity({ schema: 'Attendance', name: 'Attendance' })
 export class Attendance extends BaseTimeEntity {
     @ApiProperty({
