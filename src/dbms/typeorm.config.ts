@@ -6,8 +6,7 @@ export const TypeOrmOption: TypeOrmModuleOptions = {
     port: 3306,
     username: 'root',
     password: 'test',
-    database: 'healthRecord',
-    // TODO
+    database: 'attendance',
     entities: [__dirname + '/../**/*.entity{.ts,.js}'],
     autoLoadEntities: true,
     synchronize: true,

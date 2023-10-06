@@ -11,7 +11,15 @@ export class BaseTimeEntity {
     @Column()
     createdAt: Date;
 
+    @ApiProperty({ type: String, description: '생성자' })
+    @Column()
+    creator: string;
+
     @ApiProperty({ type: Date })
     @Column()
     updatedAt: Date;
+
+    @ApiProperty({ type: String, description: '변경자' })
+    @Column()
+    updator: string;
 }
