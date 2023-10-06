@@ -3,7 +3,7 @@ import { BaseTimeEntity } from '../../BaseTimeEntity';
 import { Attendee } from '../../attendee//entities/attendee.entity';
 import { Comment } from '../../comment/entities/comment.entity';
 import { User } from '../../user/entities/user.entity';
-import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, Unique } from 'typeorm';
 import { attendanceType } from '../attendanceType.enum';
 
 @Entity({ schema: 'Attendance', name: 'Attendance' })

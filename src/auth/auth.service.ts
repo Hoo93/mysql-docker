@@ -6,6 +6,7 @@ import { User } from 'src/user/entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { log } from 'console';
 // import { UserRepository } from '../user/user.repository';
 
 @Injectable()
