@@ -13,7 +13,7 @@ export class AttendanceService {
     ) {}
 
     async create(createAttendanceDto: CreateAttendanceDto) {
-        return 'This action adds a new attendance';
+        return this.attendanceRepository.save(createAttendanceDto);
     }
 
     findAll() {
