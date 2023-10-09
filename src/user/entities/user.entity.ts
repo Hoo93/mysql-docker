@@ -40,7 +40,6 @@ export class User extends BaseTimeEntity {
     email: string;
 
     @ManyToMany(() => Attendance, (attendance) => attendance.users)
-    @JoinTable()
     attendances: Attendance[];
 
     @ApiProperty({
